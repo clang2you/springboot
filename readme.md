@@ -4,7 +4,7 @@
 + **特性：**
   + 快速创建独立 spring 应用 
     + SSM：导包、写配置、启动运行
-  + 直接嵌入 Tomcat、Jetty or Undertow（无序部署 war 包）【 serverlet 容器】
+  + 直接嵌入 Tomcat、Jetty or Undertow（无需部署 war 包）【 serverlet 容器 】
     +  linux tomcat mysql：war 放到 tomcat 的 webapps 下
     +  jar：部署环境有 java 环境即可 java -jar
   + 提供可选的 starter，简化应用整合
@@ -20,10 +20,11 @@
   + 无代码生成、无 xml
 ## 2. 快速体验
 > 场景：浏览器发送 /hello 请求，返回“hello，spring boot3
-### 1. 开发流程
-1. pom.xml
+### 开发流程
+1. 创建一个 maven 项目，导入场景
 > 所有springboot项目都必须继承自 spring-boot-starter-parent
 ```xml
+    <!-- pom.xml -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -32,6 +33,7 @@
 ```
 > 添加 web 开发的场景启动器
 ```xml
+    <!-- pom.xml -->    
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -39,7 +41,8 @@
         </dependency>
     </dependencies>
 ```
-> 编写代码
+2. 实现一个基本项目（基于官方文档说明）
+> 主程序
 ```java
 /**
  * MainApplicaiton.java
@@ -51,3 +54,49 @@ public class MainApplicaiton {
     }
 }
 ```
+> 业务代码
+```java
+/**
+ * controller/HelloController.java
+ */
+@RestController
+public class HelloController {
+  @GetMapping("/hello")
+  public String Hello(){
+    return "Hello, Spring boot3!";
+  }
+}
+
+```
+> 创建可执行 jar 包, 首先添加 Springboot 应用打包插件, 然后执行 mvn clean package
+```xml
+    <!-- pom.xml -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+```
+> 使用命令执行打包后的文件
+```dos
+java -jar demo.jar
+```
+## 特性小结
+### 1. 简化整合
+导入相关的场景，拥有相关的功能 => 场景启动器
+> 默认支持的所有场景：https://docs.spring.io/spring-boot/current/reference/html/using.html#using.build-systems.starters
++ 官方提供的场景，命名为：spring-boot-starter-*
++ 第三方提供场景，命名为：*-sprint-boot-starter
+场景一导入，万物皆就绪
+### 2. 简化开发
+无需编写任何配置，直接开发业务
+### 3. 简化配置
+> application.properties
+```properties
+server.port = 8888
+server.address = 0.0.0.0
+```
+
