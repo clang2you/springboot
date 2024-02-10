@@ -102,12 +102,12 @@ server.address = 0.0.0.0
 ```
 + 配置基本都有默认值
 + 能写的所有配置都在：https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties
-### 4. 简化部署
+#### 4. 简化部署
 打包为可执行的 jar 包
 服务器上仅需有 java 环境即可
-### 5. 简化运维
+#### 5. 简化运维
 修改配置(外部放一个 application.properties)、监控、健康检查
-## Spring Initializer 创建向导
+### Spring Initializer 创建向导
 一键创建好整个项目（建议 IntelliJ Idea Ultimate 版本使用，社区版需登录 https://start.spring.io 页面）
 ![img.png](img.png)
 ## 3. 应用分析
