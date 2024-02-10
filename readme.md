@@ -172,3 +172,9 @@ server.address = 0.0.0.0
 #### 2. 完整流程
 ![img_1.png](img_1.png)
 ## 4. 核心技能
+### 1. 常用注解
+> Spring boot 摈弃 xml 配置方式, 改为**全注解驱动**
+#### 1. 组件注册
+@Configuration、@SpringConfiguraiton、@Bean、@Controller、@Service、@Reposity、@Component、@Import、@ComponentScan
+#### 2. 条件注解
+@ConditionalOnXxx
