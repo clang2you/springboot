@@ -154,7 +154,7 @@ server.address = 0.0.0.0
     + **Spring boot 只会扫描主程序所在的包及其下面的包, 自动的 component-scan 功能**
     + 自定义扫描路径：
       + `@SpringBootApplication(scanBasePackages="com.demo")`
-      + `@ComponentScan("com.demo)` 直接指定扫描的路径
+      + `@ComponentScan("com.demo")` 直接指定扫描的路径
   + 配置默认值:
     + **配置文件**的所有配置项是和某个**类的对象**值进行一一绑定的 
     + 绑定了配置文件中的每一项值的类:**配置属性类**
@@ -165,4 +165,7 @@ server.address = 0.0.0.0
   + 按需加载自动配置：
     + 导入场景 `spring-boot-starter-web`
     + 场景启动器除了会导入相关功能依赖、导入一个 `spring-boot-starter`, 是所有 `starter` 的 `starter`, 是基础核心 `starter`
-    + `spring-boot-starter` 导入了一个包 `spring-boot-autoconfigure`, 包里面都是各种场景的 `AutoConfiguration`
+    + `spring-boot-starter` 导入了一个包 `spring-boot-autoconfigure`, 包里面都是各种场景的 `AutoConfiguration` **自动配置类**
+    + 虽然全场景的的自动配置都在 `spring-boot-autoconfigure` 这个包，但是不是全都开启的
+      + 导入哪个场景就开启哪个自动配置
++ 总结：导入场景启动器，触发 `spring-boot-autoconfigure` 这个包的自动配置生效，容器中就会具有相关场景的功能
