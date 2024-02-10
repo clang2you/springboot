@@ -45,7 +45,7 @@
 > 主程序
 ```java
 /**
- * MainApplicaiton.java
+ * MainApplication.java
  */
 @SpringBootApplication
 public class MainApplicaiton {
@@ -94,9 +94,62 @@ java -jar demo.jar
 ### 2. 简化开发
 无需编写任何配置，直接开发业务
 ### 3. 简化配置
-> application.properties
+`application.properties`
++ 集中式管理配置，只需要修改这个文件就行
 ```properties
 server.port = 8888
 server.address = 0.0.0.0
 ```
-
++ 配置基本都有默认值
++ 能写的所有配置都在：https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties
+### 4. 简化部署
+打包为可执行的 jar 包
+服务器上仅需有 java 环境即可
+### 5. 简化运维
+修改配置(外部放一个 application.properties)、监控、健康检查
+## Spring Initializer 创建向导
+一键创建好整个项目（建议 IntelliJ Idea Ultimate 版本使用，社区版需登录 https://start.spring.io 页面）
+![img.png](img.png)
+## 应用分析
+### 1. 依赖管理机制
++ maven 依赖传递原则: A-B-C: A 就拥有 B 和 C
++ 导入场景启动器，会自动把这个场景的所有核心依赖全部导入进来
++ 每个 spring boot 项目都有一个父项目 `spring-boot-starter-parent`
++ parent 的父项目是 `spring-boot-dependencies`
++ 父项目版本仲裁中心把所有常见的 jar 的依赖版本都声明好了
++ 如需自定义版本：
+  + 利用 maven 就近原则，直接在 `pom.xml` 的 `properties` 标签中声明父项目用的版本属性的 key
+  + 直接在**导入依赖的时候声明版本**
++ 第三方 jar 包
+  + boot 父项目没有管理的需要自行声明好
+```xml
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactid>druid</artifactid>
+        <version>1.2.16</version>
+    </dependency>
+```
+### 2. 自动配置机制
+#### 1. 初步理解
++ 自动配置的 Tomcat、SpringMVC 等
+  + 导入场景，容器中就会自动配置好这个场景的核心组件 
+  + 以前：DispatchServlet、ViewResolver、CharacterEncodingFilter...
+  + 现在：自动配置好的这些组件
+  + 验证：**容器中有了什么组件，就具有什么功能**
+  ```java
+      public static void main(String[] args) {
+          var ioc = SpringApplication.run(MainApplicaiton.class, args);
+  
+          // 1. 获取容器中所有组件的名字
+          String[] names = ioc.getBeanDefinitionNames();
+          // 2. 挨个遍历: dispatcherServlet、beanNameViewResolver、characterEncodingFilter、multipartResolver
+          // Spring boot 把以前配置的核心组件现在都给我们自动配置好了
+          for (String name : names) {
+              System.out.println(name);
+          }
+      }
+  ```
+  + 默认的包扫描规则:
+    + `@SpringBootApplication` 标注的类就是主程序类
+    + **Spring boot 只会扫描主程序所在的包及其下面的包**
+    + @
