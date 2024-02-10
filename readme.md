@@ -171,4 +171,4 @@ server.address = 0.0.0.0
 + 总结：导入场景启动器，触发 `spring-boot-autoconfigure` 这个包的自动配置生效，容器中就会具有相关场景的功能
 #### 2. 完整流程
 ![img_1.png](img_1.png)
-## 3. 核心技能
+## 4. 核心技能
