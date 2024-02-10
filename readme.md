@@ -151,5 +151,18 @@ server.address = 0.0.0.0
   ```
   + 默认的包扫描规则:
     + `@SpringBootApplication` 标注的类就是主程序类
-    + **Spring boot 只会扫描主程序所在的包及其下面的包**
-    + @
+    + **Spring boot 只会扫描主程序所在的包及其下面的包, 自动的 component-scan 功能**
+    + 自定义扫描路径：
+      + `@SpringBootApplication(scanBasePackages="com.demo")`
+      + `@ComponentScan("com.demo)` 直接指定扫描的路径
+  + 配置默认值:
+    + **配置文件**的所有配置项是和某个**类的对象**值进行一一绑定的 
+    + 绑定了配置文件中的每一项值的类:**配置属性类**
+    + ex: 
+      + `ServerProperties` 绑定了所有 Tomcat 服务器有关的配置
+      + `MultipartProperties` 绑定了所有文件上传相关的配置
+      + 参照官方文档：https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties ，或者参照绑定的**配置属性类**
+  + 按需加载自动配置：
+    + 导入场景 `spring-boot-starter-web`
+    + 场景启动器除了会导入相关功能依赖、导入一个 `spring-boot-starter`, 是所有 `starter` 的 `starter`, 是基础核心 `starter`
+    + `spring-boot-starter` 导入了一个包 `spring-boot-autoconfigure`, 包里面都是各种场景的 `AutoConfiguration`
