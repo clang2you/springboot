@@ -110,7 +110,7 @@ server.address = 0.0.0.0
 ## Spring Initializer 创建向导
 一键创建好整个项目（建议 IntelliJ Idea Ultimate 版本使用，社区版需登录 https://start.spring.io 页面）
 ![img.png](img.png)
-## 应用分析
+## 3. 应用分析
 ### 1. 依赖管理机制
 + maven 依赖传递原则: A-B-C: A 就拥有 B 和 C
 + 导入场景启动器，会自动把这个场景的所有核心依赖全部导入进来
