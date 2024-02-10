@@ -84,16 +84,16 @@ public class HelloController {
 ```dos
 java -jar demo.jar
 ```
-## 特性小结
-### 1. 简化整合
+### 特性小结
+#### 1. 简化整合
 导入相关的场景，拥有相关的功能 => 场景启动器
 > 默认支持的所有场景：https://docs.spring.io/spring-boot/current/reference/html/using.html#using.build-systems.starters
 + 官方提供的场景，命名为：spring-boot-starter-*
 + 第三方提供场景，命名为：*-sprint-boot-starter
 场景一导入，万物皆就绪
-### 2. 简化开发
+#### 2. 简化开发
 无需编写任何配置，直接开发业务
-### 3. 简化配置
+#### 3. 简化配置
 `application.properties`
 + 集中式管理配置，只需要修改这个文件就行
 ```properties
