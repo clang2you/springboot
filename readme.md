@@ -175,6 +175,14 @@ server.address = 0.0.0.0
 ### 1. 常用注解
 > Spring boot 摈弃 xml 配置方式, 改为**全注解驱动**
 #### 1. 组件注册
-@Configuration、@SpringConfiguraiton、@Bean、@Controller、@Service、@Reposity、@Component、@Import、@ComponentScan
+**@Configuration、@SpringConfiguration  
+@Bean、@Scope  
+@Controller、@Service、@Reposity、@Component  
+@Import  
+@ComponentScan**  
+> 步骤：
+> 1. `@Configuration` 编写一个配置类
+> 2. 在配置类中，自定义方法给容器中注册组件。配合 `@Bean`
+> 3. 或使用 `@Import` 导入第三方的组件
 #### 2. 条件注解
 @ConditionalOnXxx
