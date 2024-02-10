@@ -109,7 +109,7 @@ server.address = 0.0.0.0
 修改配置(外部放一个 application.properties)、监控、健康检查
 ### Spring Initializer 创建向导
 一键创建好整个项目（建议 IntelliJ Idea Ultimate 版本使用，社区版需登录 https://start.spring.io 页面）
-![img.png](img.png)
+![img.png](md_img/img.png)
 ## 3. 应用分析
 ### 1. 依赖管理机制
 + maven 依赖传递原则: A-B-C: A 就拥有 B 和 C
@@ -170,7 +170,7 @@ server.address = 0.0.0.0
       + 导入哪个场景就开启哪个自动配置
 + 总结：导入场景启动器，触发 `spring-boot-autoconfigure` 这个包的自动配置生效，容器中就会具有相关场景的功能
 #### 2. 完整流程
-![img_1.png](img_1.png)
+![img_1.png](md_img/img_1.png)
 ## 4. 核心技能
 ### 1. 常用注解
 > Spring boot 摈弃 xml 配置方式, 改为**全注解驱动**
