@@ -185,4 +185,15 @@ server.address = 0.0.0.0
 > 2. 在配置类中，自定义方法给容器中注册组件。配合 `@Bean`
 > 3. 或使用 `@Import` 导入第三方的组件
 #### 2. 条件注解
-@ConditionalOnXxx
+> 如果注解指定的条件成立，则触发指定行为
+
+**`@ConditionalOnXxx`**  
+**`@ConditionalOnClass`** 如果路径中存在这个类，则触发指定行为  
+**`@ConditionalOnMissingClass`** 如果类路径中**不**存在这个类，则触发指定行为  
+**`@ConditionalOnBean`** 如果容器中存在这个 Bean（组件），则触发指定行为
+**`@ConditionalOnMissingBean`** 如果容器中**不**存在这个 Bean（组件），则触发指定行为
+> 场景：
+> + 如果存在 `FastSqlException` 这个类，给容器中发一个 `Cat` 组件，名 cat01
+> + 否则，就给容器中放一个 `Dog` 组件，名 dog01
+> + 如果容器中有`dog01`这个组件，就给容器中放一个 `User` 组件，名 zhangsan
+> + 否则，就放一个 `User` 组件，名 lisi
