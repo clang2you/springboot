@@ -196,4 +196,37 @@ server.address = 0.0.0.0
 > + 如果存在 `FastSqlException` 这个类，给容器中发一个 `Cat` 组件，名 cat01
 > + 否则，就给容器中放一个 `Dog` 组件，名 dog01
 > + 如果容器中有`dog01`这个组件，就给容器中放一个 `User` 组件，名 zhangsan
-> + 否则，就放一个 `User` 组件，名 lisi
+> + 否则，就放一个 `User` 组件，名 lisi  
+> ```java
+>   // 如果放在类级别，如注解判断生效，则整个配置类采生效
+>   @ConditionalOnMissingClass(value="com.alibaba.drui.FastSqlException") 
+>   @SpringBootConfiguration
+>   public class AppConfig01 {
+>
+>       @ConditionalOnClass(name="com.alibaba.drui.FastSqlException")
+>       @Bean
+>       public Cat cat01(){
+>           return new Cat();
+>       }
+>
+>       // 放在方法级别，单独对这个方法进行注解判断，如果注解生效，方法就起作用   
+>       @ConditionalOnMissingClass(value="com.alibaba.drui.FastSqlException") 
+>       @Bean
+>       public Dog dog01(){
+>           return new Dog();
+>       }
+>
+>
+>       @ConditionalOnBean(value = Dog.class)
+>       @Bean
+>       public User zhangsan(){
+>           return new User();
+>       }
+>
+>       @ConditionalOnMissingBean(value = Dog.class)
+>       @Bean
+>       public User lisi(){
+>           return new User();
+>       }
+>   } 
+> ```
