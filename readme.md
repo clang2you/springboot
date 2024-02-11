@@ -199,18 +199,18 @@ server.address = 0.0.0.0
 > + 否则，就放一个 `User` 组件，名 lisi  
 > ```java
 >   // 如果放在类级别，如注解判断生效，则整个配置类采生效
->   @ConditionalOnMissingClass(value="com.alibaba.drui.FastSqlException") 
+>   @ConditionalOnMissingClass(value="com.alibaba.druid.FastSqlException") 
 >   @SpringBootConfiguration
 >   public class AppConfig01 {
 >
->       @ConditionalOnClass(name="com.alibaba.drui.FastSqlException")
+>       @ConditionalOnClass(name="com.alibaba.druid.FastSqlException")
 >       @Bean
 >       public Cat cat01(){
 >           return new Cat();
 >       }
 >
 >       // 放在方法级别，单独对这个方法进行注解判断，如果注解生效，方法就起作用   
->       @ConditionalOnMissingClass(value="com.alibaba.drui.FastSqlException") 
+>       @ConditionalOnMissingClass(value="com.alibaba.druid.FastSqlException") 
 >       @Bean
 >       public Dog dog01(){
 >           return new Dog();
