@@ -230,3 +230,9 @@ server.address = 0.0.0.0
 >       }
 >   } 
 > ```
+#### 3. 属性绑定  
+`@ConfigurationProperties`  
+`@EnableConfigurationProperties`
+> 将容器中任意组件 ( Bean ) 的属性值和配置文件的配置项的值进行绑定
+> 1. 给容器中注册组件 ( `@Component`、`@Bean` )
+> 2. 使用 `@ConfigurationProperties` 声明组件和配置文件的哪些配置项进行绑定
