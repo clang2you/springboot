@@ -170,7 +170,28 @@ server.address = 0.0.0.0
       + 导入哪个场景就开启哪个自动配置
 + 总结：导入场景启动器，触发 `spring-boot-autoconfigure` 这个包的自动配置生效，容器中就会具有相关场景的功能
 #### 2. 完整流程
+>思考：
+> 1. SpringBoot 如何导入一个 `starter`, 写一些简单配置，应用就能跑起来，无需关心整合
+> 2. 为什么 Tomcat 的端口号可以配置在 `applicaiton.properties` 中，并且 Tomcat 能启动成功？
+> 3. 导入场景后哪些自动配置能生效？
+
 ![img_1.png](md_img/img_1.png)
+流程:
+1. 导入 `starter-web`: 导入 web 开发场景
+   1. 场景启动器导入了相关场景的所有依赖：`starter-json`、`starter-tomcat`、`springmvc`
+   2. 每个场景启动器都引入了一个 `spring-boot-starter`，核心场景启动器
+   3. 核心场景启动器引入了 `spring-boot-autoconfigure` 包
+   4. `spring-boot-autoconfigure` 囊括了所有场景的所有配置
+   5. 只要这个包下的所有类都能生效，那么相当于 SpringBoot 官方写好的整合功能就生效了
+   6. SpringBoot 默认却扫描不到 `spring-boot-autoconfigure` 下写好的所有配置类（这些配置类给我们做了整合操作）
+2. 主程序：`@SpringBootApplication`
+   1. `@SpringBootApplication` 由三个注解组成 `@SpringBootConfiguration`、`@EnableAutoConfigurtion`、`@ComponentScan`
+   2. SpringBoot 默认只能扫描自己主程序所在的包及其下面的子包，扫描不到 `spring-boot-autoconfigure` 包中官方写好的**配置类**
+   3. `@EnableAutoConfiguration` SpringBoot **开启自动配置的核心**
+      1. 是由 `@Import(AutoConfigurationImportSelector.class)` 提供功能：批量给容器中导入组件
+      2. SprintBoot 启动会默认加载 142 个配置类
+      3. 这 142 个配置类来自于 `META-INF/spring/org.springframework.boot.autoconfiguration.AutoConfiguration.imports`
+3. 写业务，全程无需关心各种整合（底层这些整合写好了，并且也生效了）
 ## 4. 核心技能
 ### 1. 常用注解
 > Spring boot 摈弃 xml 配置方式, 改为**全注解驱动**
@@ -231,8 +252,9 @@ server.address = 0.0.0.0
 >   } 
 > ```
 #### 3. 属性绑定  
-`@ConfigurationProperties`  
-`@EnableConfigurationProperties`
+`@ConfigurationProperties` 声明组件的的属性和配置文件哪些前缀开始项进行绑定  
+`@EnableConfigurationProperties` 快速注册注解：
++ 场景：SpingBoot 默认只扫描自己主程序所在的包，如果导入第三方包，即使组件上标注 `@Component`、`@ConfigurationProperties` 等注解也没用。因为组件都扫描不进来，此时使用这个注解就可以快速进行属性绑定并把组件注册进容器
 > 将容器中任意组件 ( Bean ) 的属性值和配置文件的配置项的值进行绑定
 > 1. 给容器中注册组件 ( `@Component`、`@Bean` )
 > 2. 使用 `@ConfigurationProperties` 声明组件和配置文件的哪些配置项进行绑定
