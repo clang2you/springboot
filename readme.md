@@ -190,7 +190,9 @@ server.address = 0.0.0.0
    3. `@EnableAutoConfiguration` SpringBoot **开启自动配置的核心**
       1. 是由 `@Import(AutoConfigurationImportSelector.class)` 提供功能：批量给容器中导入组件
       2. SprintBoot 启动会默认加载 142 个配置类
-      3. 这 142 个配置类来自于 `META-INF/spring/org.springframework.boot.autoconfiguration.AutoConfiguration.imports`
+      3. 这 142 个配置类来自: `META-INF/spring/org.springframework.boot.autoconfiguration.AutoConfiguration.imports` 文件指定的
+      4. 项目启动的时候利用 `@Import` 批量导入组件机制把 `autoconfigure` 包下的 142 `xxxAutoConfiguration` 类导入进来（**自动配置类**）
+      5. 虽然导入了 142 自动配置类
 3. 写业务，全程无需关心各种整合（底层这些整合写好了，并且也生效了）
 ## 4. 核心技能
 ### 1. 常用注解
